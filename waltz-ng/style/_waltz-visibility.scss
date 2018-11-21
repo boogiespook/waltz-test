@@ -1,0 +1,18 @@
+
+@mixin waltz-visibility($percent) {
+    .waltz-visibility-parent .waltz-visibility-child-#{$percent} {
+        opacity: #{$percent / 100};
+        transition: opacity 0.3s linear;
+    }
+    .waltz-visibility-parent:hover .waltz-visibility-child-#{$percent} {
+        opacity: 1;
+        transition: opacity 0.2s linear;
+    }
+}
+
+@include waltz-visibility(10);
+@include waltz-visibility(30);
+@include waltz-visibility(40);
+@include waltz-visibility(50);
+@include waltz-visibility(70);
+@include waltz-visibility(90);

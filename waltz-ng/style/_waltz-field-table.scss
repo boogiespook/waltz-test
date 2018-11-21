@@ -1,0 +1,29 @@
+@import "./variables";
+
+.waltz-field-table {
+    tr {
+        margin-left: 2px;
+    }
+    .wft-label {
+        vertical-align: top;
+        color: $waltz-field-label-color;
+        font-weight: lighter;
+        padding-right: 12px;
+    }
+
+    .wft-danger {
+        background-color: #ffe4dd;
+        border: 1px solid #ffb1a6;
+    }
+}
+
+.waltz-field-table-border {
+    tr:not(:last-child) {
+        border-bottom: 1px solid #ececec;
+    }
+    td {
+        padding-bottom: 2px;
+        padding-top: 2px;
+    }
+}
+

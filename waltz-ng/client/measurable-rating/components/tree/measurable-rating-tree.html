@@ -1,0 +1,74 @@
+<div class="wmt-search-region">
+    <waltz-icon name="search"
+                ng-class="{
+                    'wmt-search-active' : $ctrl.searchTerms.length > 0,
+                    'wmt-search-inactive' : $ctrl.searchTerms.length == 0
+                }">
+    </waltz-icon>
+    <input type='search'
+           class="form-control"
+           name="searchTerms"
+           ng-model="$ctrl.searchTerms"
+           ng-change="$ctrl.searchTermsChanged($ctrl.searchTerms)"
+           ng-model-options="{ debounce: 200 }"
+           placeholder="Search">
+    &nbsp;
+    <waltz-icon name="close"
+                style="color: darkred"
+                ng-if="$ctrl.searchTerms.length > 0"
+                class="clickable"
+                ng-click="$ctrl.clearSearch()">
+    </waltz-icon>
+
+</div>
+
+<div ng-class="$ctrl.containerClass"
+     ng-attr-tabindex="{{$ctrl.onKeypress ? 1 : undefined}}"
+     ng-keydown="$ctrl.onKeypress($event)">
+    <treecontrol class="tree-light"
+                 tree-model="$ctrl.hierarchy"
+                 expanded-nodes="$ctrl.expandedNodes"
+                 options="$ctrl.treeOptions"
+                 on-selection="$ctrl.onSelect(node, $ctrl.ratingsByMeasurable[node.id])"
+                 order-by="'-name'">
+
+        <span class="waltz-visibility-parent">
+            <span ng-style="{ opacity: node.concrete ? 1 : 0.5 }">
+                <waltz-rating-indicator-cell rating="$ctrl.ratingsByCode[$ctrl.ratingsByMeasurable[node.id].rating]">
+                </waltz-rating-indicator-cell>
+            </span>
+
+            <span uib-popover-template="'wmrt-popover.html'"
+                  popover-trigger="mouseenter"
+                  popover-append-to-body="true"
+                  popover-placement="right"
+                  ng-class="{ 'text-muted': $ctrl.ratingsByMeasurable[node.id].rating == null }"
+                  class="no-overflow">
+                <span ng-bind="node.displayName"
+                      ng-class="{ 'italics' : ! node.concrete }">
+                </span>
+                <span class="small"
+                       ng-if="$ctrl.ratingsByMeasurable[node.id].description.length > 0">
+                     <waltz-icon name="sticky-note-o"></waltz-icon>
+                </span>
+            </span>
+        </span>
+
+    </treecontrol>
+</div>
+
+
+
+
+<script type="text/ng-template"
+        id="wmrt-popover.html">
+    <div class="small">
+        <strong ng-bind="node.name"></strong>
+        <hr>
+        <waltz-markdown text="node.description"></waltz-markdown>
+        <div ng-if="$ctrl.ratingsByMeasurable[node.id].description.length > 0">
+            <hr>
+            <div ng-bind="$ctrl.ratingsByMeasurable[node.id].description"></div>
+        </div>
+    </div>
+</script>

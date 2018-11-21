@@ -1,0 +1,39 @@
+<span class="waltz-entity-icon-label"
+      uib-popover-template="'weil-popover.html'"
+      popover-trigger="{{$ctrl.trigger}}"
+      popover-append-to-body="true"
+      popover-placement="{{ $ctrl.tooltipPlacement }}" >
+    <waltz-icon fixed-width="true"
+                name="{{ $ctrl.entityRef.kind | toIconName:'entity' }}"
+                ng-if="$ctrl.iconPlacement === 'left'"
+                style="color: #332b23;">
+    </waltz-icon>
+
+    <span ng-bind="$ctrl.entityRef.name"
+          ng-class="{
+            'weil-entity-removed': $ctrl.entityRef.entityLifecycleStatus === 'REMOVED',
+            'weil-entity-pending': $ctrl.entityRef.entityLifecycleStatus === 'PENDING'
+          }">
+    </span>
+
+    <waltz-icon fixed-width="true"
+                name="{{ $ctrl.entityRef.kind | toIconName:'entity' }}"
+                ng-if="$ctrl.iconPlacement === 'right'"
+                style="color: #332b23;">
+    </waltz-icon>
+
+</span>
+
+
+<script type="text/ng-template"
+        id="weil-popover.html">
+    <div>
+        <div ng-bind="$ctrl.entityRef.description"></div>
+        <div ng-if="$ctrl.entityRef.entityLifecycleStatus" class="small">
+            <hr>
+            <strong>Status:</strong>
+            <span ng-bind="$ctrl.entityRef.entityLifecycleStatus | toDisplayName:'entityLifecycleStatus'">
+            </span>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,67 @@
+<div>
+    <waltz-page-header icon="wpforms"
+                       name="{{ ctrl.surveyRun.name }}"
+                       small="Survey Run">
+        <ol class="waltz-breadcrumbs">
+            <li><a ui-sref="main">Home</a></li>
+            <li><a ui-sref="main.survey.instance.user">Survey</a></li>
+            <li><a ui-sref="main.survey.template.list">Templates</a></li>
+            <li><a ui-sref="main.survey.template.view ({id: ctrl.surveyTemplate.id })"
+                   ng-bind="ctrl.surveyTemplate.name"></a></li>
+            <li>Runs</li>
+            <li ng-bind="ctrl.surveyRun.name"></li>
+        </ol>
+    </waltz-page-header>
+
+
+    <div class="waltz-page-summary waltz-page-summary-attach">
+        <waltz-survey-run-overview run="ctrl.surveyRun"
+                                   template="ctrl.surveyTemplate"
+                                   on-update-due-date="ctrl.updateDueDate">
+        </waltz-survey-run-overview>
+    </div>
+
+    <br>
+
+    <waltz-section name="Instances">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Entity</th>
+                <th>Status</th>
+                <th>Due</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="instance in ctrl.surveyInstances">
+                <td>
+                    <waltz-entity-link entity-ref="instance.surveyEntity">
+                    </waltz-entity-link>
+                </td>
+                <td>
+                    <span ng-bind="instance.status | toDisplayName:'surveyInstanceStatus'">
+                    </span>
+                </td>
+                <td>
+                    <waltz-from-now timestamp="instance.dueDate"
+                                    days-only="true">
+                    </waltz-from-now>
+                </td>
+                <td>
+                    <a class='clickable'
+                       ui-sref="main.survey.instance.response.view ({id: instance.id })"
+                       ng-if="instance.status === 'COMPLETED' || instance.status === 'APPROVED' || instance.status === 'EXPIRED'">
+                        view response
+                    </a>
+                    <a class='clickable'
+                       ui-sref="main.survey.instance.view ({id: instance.id })"
+                       ng-if="instance.status === 'NOT_STARTED' || instance.status === 'IN_PROGRESS'">
+                        edit
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </waltz-section>
+</div>

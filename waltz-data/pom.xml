@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Waltz - Enterprise Architecture
+ Copyright (C) 2016, 2017, 2018 Waltz open source project
+ See README.md for more information
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>waltz</artifactId>
+        <groupId>com.khartec</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>waltz-data</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.khartec</groupId>
+            <artifactId>waltz-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.khartec</groupId>
+            <artifactId>waltz-schema</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Database -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+<dependency>
+  <groupId>org.jooq</groupId>
+  <artifactId>jooq</artifactId>
+  <version>3.11.7</version>
+</dependency>
+<dependency>
+  <groupId>org.jooq</groupId>
+  <artifactId>jooq-meta</artifactId>
+  <version>3.11.7</version>
+</dependency>
+<dependency>
+  <groupId>org.jooq</groupId>
+  <artifactId>jooq-codegen</artifactId>
+  <version>3.11.7</version>
+</dependency>
+        <!-- Testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

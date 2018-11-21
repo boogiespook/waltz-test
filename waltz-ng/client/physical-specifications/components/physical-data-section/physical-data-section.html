@@ -1,0 +1,63 @@
+<div>
+
+    <div class="row"
+         ng-if="$ctrl.produces.length > 0">
+
+        <div class="col-md-12">
+            <strong>Produces (<span ng-bind="$ctrl.produces.length"></span>)</strong>
+
+            <waltz-grid-with-search column-defs="$ctrl.produceColumnDefs"
+                        entries="$ctrl.produces"
+                        on-initialise="$ctrl.onProducesGridInitialise"
+                        class="small">
+            </waltz-grid-with-search>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row"
+         ng-if="$ctrl.consumes.length > 0">
+        <div class="col-md-12">
+            <strong>Consumes (<span ng-bind="$ctrl.consumes.length"></span>)</strong>
+
+            <waltz-grid-with-search column-defs="$ctrl.consumeColumnDefs"
+                                    entries="$ctrl.consumes"
+                                    on-initialise="$ctrl.onConsumesGridInitialise"
+                                    class="small">
+            </waltz-grid-with-search>
+        </div>
+    </div>
+
+
+
+
+    <waltz-no-data ng-if="$ctrl.produces.length == 0 && $ctrl.consumes.length == 0">
+        <message>
+            <strong>No Physical Flow</strong> detail available for this
+            <span ng-bind="$ctrl.primaryRef.kind | toDisplayName:'entity'">
+            </span>
+        </message>
+    </waltz-no-data>
+
+
+    <div class="row"
+         ng-hide="$ctrl.unusedSpecifications | isEmpty">
+
+        <br>
+
+        <div class="col-md-12">
+            <strong>Unused Specifications</strong>
+            <small class="text-muted">
+                Specifications which have been registered, but are not sent to any consumers.
+            </small>
+
+            <br><br>
+
+            <waltz-grid column-defs="$ctrl.unusedSpecificationsColumnDefs"
+                        row-data="$ctrl.unusedSpecifications"
+                        on-initialise="$ctrl.onUnusedSpecificationsGridInitialise"
+                        class="small">
+            </waltz-grid>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,146 @@
+<div class="row waltz-source-and-target-panel">
+    <div class="col-sm-12 waltz-visibility-parent">
+        <waltz-source-and-target-graph entity-ref="$ctrl.entityRef"
+                                       logical-flows="$ctrl.filteredFlowData.flows"
+                                       decorators="$ctrl.filteredFlowData.decorators"
+                                       tweakers="$ctrl.tweakers">
+        </waltz-source-and-target-graph>
+        <div ng-if='$ctrl.filteredFlowData.selectedTypeId > 0'
+             class="small text-muted">
+            <hr>
+            <waltz-icon name="filter"></waltz-icon>
+            Showing only
+            <span ng-bind="$ctrl.filteredFlowData.selectedTypeId | toDisplayName:'dataType'"></span>
+            -
+            <a class="clickable btn btn-xs btn-success"
+               ng-click="$ctrl.showAll()">
+                Show All
+            </a>
+            <hr>
+        </div>
+
+        <div class="pull-right" style="margin-right: 30px; margin-bottom: 4px">
+            <a class="clickable waltz-visibility-child-30"
+               ng-click="$ctrl.exportLogicalFlowData()">
+                <waltz-icon name="download"></waltz-icon>
+                Export logical flows
+            </a>
+        </div>
+    </div>
+
+    <!-- POPUP -->
+    <div ng-if="$ctrl.selected"
+         ng-style="{
+            top: ($ctrl.selected.y) + 'px',
+            right: $ctrl.selected.type == 'source' ? '100px' : null,
+            left: $ctrl.selected.type == 'target' ? '100px' : null
+         }"
+         class="wsatp-popup waltz-fade-if">
+        <h4>
+            <span ng-if="$ctrl.selected.type === 'source'">
+                <waltz-entity-link entity-ref="$ctrl.selected.logicalFlow.source" >
+                </waltz-entity-link>
+                &rarr;
+                <waltz-entity-icon-label entity-ref="$ctrl.selected.logicalFlow.target">
+                </waltz-entity-icon-label>
+            </span>
+
+            <span ng-if="$ctrl.selected.type === 'target'">
+                <waltz-entity-icon-label entity-ref="$ctrl.selected.logicalFlow.source" >
+                </waltz-entity-icon-label>
+                &rarr;
+                <waltz-entity-link entity-ref="$ctrl.selected.logicalFlow.target">
+                </waltz-entity-link>
+            </span>
+
+            <a class="clickable pull-right small"
+               style="color: blue"
+               ng-click="$ctrl.selected = null">
+                <waltz-icon name="close"></waltz-icon>
+                Close
+            </a>
+        </h4>
+
+        <div>
+            <waltz-entity-link entity-ref="{
+                    kind: 'LOGICAL_DATA_FLOW',
+                    id: $ctrl.selected.logicalFlow.id,
+                    name: 'More about this logical flow &raquo;'}">
+            </waltz-entity-link>
+        </div>
+
+        <hr>
+
+        <strong>Data Types</strong>
+        <div ng-if="$ctrl.selected.types.length > 0" class="wsatp-data-types">
+            <ul class="list-inline">
+                <li ng-repeat='type in $ctrl.selected.types'>
+                    <a ui-sref="main.data-type.view ({id: type.id})">
+                        <span class="label"
+                              ng-class="{
+                                'label-success' : type.rating == 'PRIMARY',
+                                'label-warning' : type.rating == 'SECONDARY',
+                                'label-danger' : type.rating == 'DISCOURAGED',
+                                'label-default' : type.rating == 'NO_OPINION',
+                              }"
+                              ng-bind="type.id | toDisplayName:'dataType'">
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <strong>Physical Data</strong>
+        <span class="small pull-right">
+            <a class="clickable"
+               ui-sref='main.physical-flow.registration({
+                            kind: $ctrl.selected.type === "source" ? $ctrl.selected.entity.kind : $ctrl.entityRef.kind,
+                            id: $ctrl.selected.type === "source" ? $ctrl.selected.entity.id : $ctrl.entityRef.id,
+                            targetLogicalFlowId: $ctrl.selected.logicalFlowId
+                        })'>
+                Register physical flow
+            </a>
+        </span>
+        <div ng-if="$ctrl.selected.physicalFlows.length > 0"
+             ng-class="{'waltz-scroll-region-250': $ctrl.selected.physicalFlows.length > 8}" >
+            <table class="table table-condensed small small">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Format</th>
+                    <th>Transport</th>
+                    <th>Frequency</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="pf in $ctrl.selected.physicalFlows">
+                    <td>
+                        <a ui-sref="main.physical-flow.view ({ id: pf.id })">
+                            <span ng-bind="pf.specification.name"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <span ng-bind="pf.specification.format"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="pf.transport"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="pf.frequency"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <waltz-no-data ng-if="$ctrl.selected.physicalFlows.length == 0">
+            <message>
+                No records of physical data flows found.
+            </message>
+        </waltz-no-data>
+
+
+    </div>
+</div>

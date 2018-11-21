@@ -1,0 +1,127 @@
+<div>
+    <waltz-page-header icon="wpforms"
+                       name="{{ ctrl.template.name }}"
+                       small="Survey Template">
+        <ol class="waltz-breadcrumbs">
+            <li><a ui-sref="main">Home</a></li>
+            <li><a ui-sref="main.survey.instance.user">Survey</a></li>
+            <li><a ui-sref="main.survey.template.list">Templates</a></li>
+            <li>Templates</li>
+        </ol>
+    </waltz-page-header>
+
+    <div class="waltz-page-summary waltz-page-summary-attach">
+        <waltz-section-actions>
+            <a class="btn btn-primary btn-xs"
+               waltz-has-role="SURVEY_TEMPLATE_ADMIN"
+               ng-if="ctrl.template.status === 'DRAFT'"
+               ui-sref="main.survey.template.edit ({id: ctrl.template.id })">
+                Edit
+            </a>
+            <a class="btn btn-primary btn-xs"
+               waltz-has-role="SURVEY_TEMPLATE_ADMIN"
+               ng-click="ctrl.cloneTemplate()">
+                Clone
+            </a>
+            <a class="btn btn-success btn-xs"
+               waltz-has-role="SURVEY_TEMPLATE_ADMIN"
+               ng-if="ctrl.template.status !== 'ACTIVE'"
+               ng-click="ctrl.markTemplateAsActive()">
+                Mark as Active
+            </a>
+            <a class="btn btn-warning btn-xs"
+               waltz-has-role="SURVEY_TEMPLATE_ADMIN"
+               ng-if="ctrl.template.status === 'ACTIVE'"
+               ng-click="ctrl.markTemplateAsDraft()">
+                Mark as Draft
+            </a>
+            <a class="btn btn-danger btn-xs"
+               waltz-has-role="SURVEY_TEMPLATE_ADMIN"
+               ng-if="ctrl.template.status === 'ACTIVE'"
+               ng-click="ctrl.markTemplateAsObsolete()">
+                Mark as Obsolete
+            </a>
+        </waltz-section-actions>
+
+        <waltz-survey-template-overview template="ctrl.template"
+                                        people="ctrl.people">
+        </waltz-survey-template-overview>
+    </div>
+
+    <br>
+
+    <waltz-section icon='bolt'
+                   name="Runs"
+                   small="( {{ctrl.issuedAndCompletedRuns.length }} )" >
+        <waltz-section-actions>
+            <a class="btn btn-primary btn-xs"
+               waltz-has-role="SURVEY_ADMIN"
+               ng-if="ctrl.template.status === 'ACTIVE'"
+               ui-sref="main.survey.run.create ({id: ctrl.template.id })">
+                Create
+            </a>
+        </waltz-section-actions>
+
+        <div>
+            <waltz-grid-with-search column-defs="ctrl.columnDefs"
+                                    entries="ctrl.issuedAndCompletedRunsEnriched"
+                                    scope-provider="ctrl"
+                                    search-placeholder-text="Search...">
+            </waltz-grid-with-search>
+        </div>
+        <span ng-if="ctrl.draftRuns.length > 0"
+              class="text-muted small">
+            Excluding <b ng-bind="ctrl.draftRuns.length"></b> draft run(s).
+        </span>
+    </waltz-section>
+
+    <waltz-section icon="question"
+                   name="Questions"
+                   small="( {{ ctrl.questionInfos.length }} )">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-condensed table-striped">
+                    <colgroup>
+                        <col width="15%">
+                        <col width="25%">
+                        <col width="15%">
+                        <col width="24%">
+                        <col width="10%">
+                        <col width="13%">
+                        <col width="8%">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>Section Name</th>
+                        <th>Question Text</th>
+                        <th>Field Type</th>
+                        <th>Help Text</th>
+                        <th>Mandatory</th>
+                        <th>Allow Comment</th>
+                        <th>Position</th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="qi in ctrl.questionInfos | orderBy:'position'">
+                        <td><span ng-bind="qi.question.sectionName"></span></td>
+                        <td><span ng-bind="qi.question.questionText"></span></td>
+                        <td><span ng-bind="qi.question.fieldType | toDisplayName:'surveyQuestionFieldType'"></span></td>
+                        <td>
+                            <waltz-markdown text="qi.question.helpText">
+                            </waltz-markdown>
+                        </td>
+                        <td>
+                            <waltz-boolean-renderer value="qi.question.isMandatory">
+                            </waltz-boolean-renderer>
+                        </td>
+                        <td>
+                            <waltz-boolean-renderer value="qi.question.allowComment">
+                            </waltz-boolean-renderer>
+                        </td>
+                        <td><span ng-bind="qi.question.position"></span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </waltz-section>
+</div>

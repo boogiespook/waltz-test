@@ -1,0 +1,95 @@
+<div>
+
+    <waltz-page-header icon="id-badge" name="Involvement Kinds">
+        <ol class="waltz-breadcrumbs">
+            <li><a ui-sref="main">Home</a></li>
+            <li>System</li>
+            <li>Settings</li>
+        </ol>
+    </waltz-page-header>
+
+
+    <div class='waltz-page-summary waltz-page-summary-attach'>
+        <form class="form-inline">
+            <div class="form-group">
+                <label>Search</label>
+                <input type="search" class="form-control" placeholder="Filter..." ng-model="userQuery">
+            </div>
+        </form>
+        <hr>
+        <div class="waltz-user-admin-scroll">
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="involvementKind in ctrl.involvementKinds | orderBy:'name' | filter:userQuery"
+                    class="waltz-visibility-parent">
+                    <td>
+                        <waltz-editable-field on-save="ctrl.updateName"
+                                              field-type="text"
+                                              initial-val="involvementKind.name"
+                                              item-id="involvementKind.id">
+                        </waltz-editable-field>
+                    </td>
+                    <td align="left">
+                        <waltz-editable-field on-save="ctrl.updateDescription"
+                                              field-type="text"
+                                              initial-val="involvementKind.description"
+                                              item-id="involvementKind.id">
+                        </waltz-editable-field>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="btn btn-primary btn-sm"
+                                ng-if="ctrl.creatinginvolvementKind === false"
+                                ng-click="ctrl.startNewinvolvementKind()">
+                            Add
+                        </button>
+                        <div ng-if="ctrl.creatinginvolvementKind === true">
+                            <input type="text"
+                                   ng-model="ctrl.newinvolvementKind.name"
+                                   class="form-control input-sm">
+                        </div>
+                    </td>
+                    <td>
+                        <div ng-if="ctrl.creatinginvolvementKind === true">
+                            <input type="text"
+                                   ng-model="ctrl.newinvolvementKind.description"
+                                   class="form-control input-sm">
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-success btn-sm"
+                                ng-if="ctrl.creatinginvolvementKind === true"
+                                ng-click="ctrl.saveNewinvolvementKind()">
+                            Save
+                        </button>
+                        <button class="btn btn-default btn-sm"
+                                ng-if="ctrl.creatinginvolvementKind === true"
+                                ng-click="ctrl.cancelNewinvolvementKind()">
+                            Cancel
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <blockquote>
+            <p>
+                Deletion of Involvement Kinds is not supported in the user interface because it can be in used in Person
+                Involvements.  Please check these before removing an involvement kind from the system.
+            </p>
+        </blockquote>
+    </div>
+
+
+</div>

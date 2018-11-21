@@ -1,0 +1,48 @@
+<h4 ng-bind="$ctrl.title"></h4>
+<p ng-bind="$ctrl.description"></p>
+<div ng-show="$ctrl.flows.length > 6">
+    <input ng-model="$ctrl.qry"
+           type="search"
+           placeholder="Filter..."
+           class="form-control form-search">
+    <br>
+</div>
+
+<div ng-class="{ 'waltz-scroll-region-250' : $ctrl.flows.length > 6}">
+    <table class="table table-condensed small">
+        <tr ng-repeat="flow in $ctrl.flows | orderBy: 'entity.name' | filter: $ctrl.qry">
+            <td>
+                <label>
+                    <input type="checkbox"
+                           ng-model="flow.used">
+                    <waltz-entity-icon-label entity-ref="flow.counterpartEntity">
+                    </waltz-entity-icon-label>
+                </label>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div waltz-has-role="LOGICAL_DATA_FLOW_EDITOR">
+    Can't find what you're looking for?
+    Click
+    <a class="clickable"
+       ng-click="$ctrl.onDismiss()"
+       ng-href="{{ $ctrl.logicalFlowAdditionUrl }}"
+       target="_blank"
+       rel="noopener noreferrer">
+        here
+    </a>
+    to add a new node.
+</div>
+
+<hr>
+
+<button class="btn btn-success"
+        ng-click="$ctrl.update()">
+    Update
+</button>
+<a class='clickable'
+   ng-click="$ctrl.onDismiss()">
+    Cancel
+</a>

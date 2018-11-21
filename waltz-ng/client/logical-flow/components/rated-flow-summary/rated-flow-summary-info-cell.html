@@ -1,0 +1,45 @@
+<table class="table table-condensed small">
+
+    <colgroup>
+        <col width="30%">
+        <col width="70%">
+    </colgroup>
+    <tbody>
+    <tr>
+        <td>
+            <strong>Data Type</strong>
+        </td>
+        <td>
+            <span ng-bind="$ctrl.type.name">
+            </span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Rating</strong>
+        </td>
+        <td>
+            <waltz-enum-value type="'AuthoritativenessRating'"
+                              show-icon="false"
+                              key="$ctrl.rating">
+            </waltz-enum-value>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Consuming Apps</strong>
+        </td>
+        <td>
+            <div class="waltz-scroll-region" style="height: 200px">
+                <ul class="list-unstyled">
+                    <li ng-repeat="app in $ctrl.applications | orderBy:'name'">
+                        <a ui-sref="main.app.view ({ id: app.id })"
+                           ng-bind="app.name">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

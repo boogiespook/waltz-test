@@ -1,0 +1,23 @@
+@import "../../../../style/util";
+
+
+.waltz-source-and-target-panel {
+    .wsatp-popup {
+        border: 3px solid #ddd;
+        border-radius: 1.5px;
+        padding: 12px;
+        opacity: 0.93;
+        position: absolute;
+        background: #fafafa;
+        z-index: 100;
+        width: 60%;
+        display: inline-block;
+        @include waltz-box-shadow();
+    }
+
+    .wsatp-data-types {
+        li {
+            margin-left: 3px;
+        }
+    }
+}

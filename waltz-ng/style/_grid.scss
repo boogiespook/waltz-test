@@ -1,0 +1,48 @@
+.waltz-grid-currency {
+    text-align: right;
+}
+
+
+.ui-grid {
+    border-radius: $border-radius-large;
+
+    .ui-grid-top-panel {
+        border-top-left-radius: $border-radius-large;
+        border-top-right-radius: $border-radius-large;
+    }
+
+    *:focus {
+        outline: none;
+    }
+}
+
+
+.ui-grid-top-panel {
+    background: $waltz-section-background-color;
+}
+
+
+.ui-grid-menu-button {
+    background: none;
+    border: none;
+}
+
+
+.ui-grid-row:nth-child(even) .ui-grid-cell {
+  background-color: $waltz-background-color;
+}
+
+
+.ui-grid-row:nth-child(odd) .ui-grid-cell {
+  background-color: #fff;
+}
+
+
+.ui-grid-filter-select {
+  background-color: #fff;
+}
+
+
+.ui-grid-row .ui-grid-cell {
+    background-color: inherit !important;
+}

@@ -1,0 +1,37 @@
+<div class="waltz-bookmark-kinds">
+
+    <div ng-repeat="kind in $ctrl.kinds"
+         ng-click="$ctrl.select(kind)"
+         ng-class="{
+                'wbk-no-bookmarks': kind.count === 0,
+                'wbk-selected': kind.selected,
+                'clickable': kind.count > 0
+             }"
+         uib-popover="{{kind.description}}"
+         popover-placement="right"
+         popover-trigger="mouseenter"
+         popover-popup-delay="300"
+         popover-append-to-body="true">
+
+        <span>
+
+            <waltz-icon name="{{kind.icon}}"
+                        size="lg"
+                        ng-class="{
+                            'wbk-has-bookmarks': kind.count > 0,
+                        }">
+            </waltz-icon>
+
+            <span ng-bind="kind.name"
+                  class="small">
+            </span>
+
+        </span>
+
+        <waltz-icon name="times"
+                    ng-if="kind.selected"
+                    class="clickable pull-right">
+        </waltz-icon>
+
+    </div>
+</div>

@@ -1,0 +1,17 @@
+
+<waltz-grid-with-search  ng-if="$ctrl.rows.length > 0"
+                         column-defs="$ctrl.columnDefs"
+                         entries="$ctrl.rows"
+                         on-row-select="$ctrl.onRowSelect"
+                         search-placeholder-text="Search relationships...">
+</waltz-grid-with-search>
+
+<!-- Export -->
+<a ng-click="$ctrl.export()"
+   ng-if="!$ctrl.selectedRow"
+   class="clickable pull-right"
+   style="text-decoration: none;"
+   role="button">
+    <waltz-icon name="download"></waltz-icon>
+    Export
+</a>

@@ -1,0 +1,75 @@
+<table class="waltz-pie-segment-table">
+    <thead>
+    <tr ng-if="$ctrl.headings.length > 0">
+        <th></th>
+        <th ng-bind="$ctrl.headings[0]"></th>
+        <th ng-bind="$ctrl.headings[1]"
+            class="wpst-number-col"></th>
+        <th ng-bind="$ctrl.headings[2]"
+            class="wpst-number-col"></th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr ng-repeat="r in $ctrl.data | orderBy:'key'"
+        class="small"
+        ng-click="$ctrl.rowSelected(r, $event)"
+        ng-class="{
+            'wpst-selected': $ctrl.selectedSegmentKey === r.key,
+            'clickable' : $ctrl.config.onSelect
+        }"
+        uib-tooltip="{{ $ctrl.config.descriptionProvider(r) }}"
+        tooltip-append-to-body="true"
+        tooltip-placement="right">
+        <td>
+            <div class='wpst-indicator-cell'
+                 ng-style="{
+                    'background-color': $ctrl.config.colorProvider({ data: r }).brighter().toString(),
+                    'border-color' : $ctrl.config.colorProvider({ data: r }).toString()
+                 }">
+                &nbsp;
+            </div>
+        </td>
+        <td>
+            <span ng-bind="$ctrl.config.labelProvider(r)"></span>
+        </td>
+
+        <td class="wpst-number-col">
+            <span ng-bind="r.count"></span>
+        </td>
+        <td class="wpst-number-col">
+            <span class="small"
+                  ng-bind="$ctrl.asPercentage(r)">
+            </span>
+            %
+        </td>
+        <td width="36px">   <!-- fix the row on-select jumpy issue on IE  -->
+            <a class='clickable'
+               ng-if="$ctrl.selectedSegmentKey === r.key"
+               ng-click="$ctrl.rowSelected(null, $event)">
+                <waltz-icon size="lg"
+                            name="ban"
+                            title="Cancel selection"></waltz-icon>
+            </a>
+            <span ng-if="$ctrl.selectedSegmentKey !== r.key">
+                <waltz-icon name="fw"></waltz-icon>
+            </span>
+        </td>
+    </tr>
+    <tr class="small wpst-total-row"
+        ng-click="$ctrl.rowSelected(null, $event)">
+        <td>
+        </td>
+        <td>
+            Total
+        </td>
+
+        <td class="wpst-number-col">
+            <strong ng-bind="$ctrl.totalStr"></strong>
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>

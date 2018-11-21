@@ -1,0 +1,33 @@
+@import '../../../../style/variables';
+
+
+.wric-cell {
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    width: 1.3em;
+    height: 1.3em;
+    border: 1px solid;
+    border-radius: 6px;
+}
+
+.wric-R,.wric-DISCOURAGED {
+    background: $waltz-red;
+    border-color: darken($waltz-red, 20%);
+}
+
+.wric-A,.wric-SECONDARY {
+    background: $waltz-amber;
+    border-color: darken($waltz-amber, 20%);
+}
+
+.wric-G,.wric-PRIMARY {
+    background: $waltz-green;
+    border-color: darken($waltz-green, 20%);
+}
+
+.wric-Z,.wric-NO_OPINION {
+    background: $waltz-grey;
+    border-color: darken($waltz-grey, 20%);
+}
+

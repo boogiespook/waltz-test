@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-sm-7"
+         style="padding: 6px">
+        <waltz-entity-statistic-history-chart on-hover='$ctrl.onHover'
+                                              highlighted-date='$ctrl.highlightedDate'
+                                              points="$ctrl.points">
+        </waltz-entity-statistic-history-chart>
+
+
+        <div style="text-align: center">
+            Period:
+            <waltz-duration-selector duration="$ctrl.duration"
+                                     on-change="$ctrl.onChangeDuration">
+            </waltz-duration-selector>
+        </div>
+    </div>
+    <div class="col-sm-5">
+        <div ng-if="$ctrl.selected">
+            <h5 ng-bind="$ctrl.selected.dateString"></h5>
+            <table class="table table-condensed small">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Outcome</th>
+                    <th ng-bind="$ctrl.statColumnName"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in $ctrl.selected.tallies | orderBy:'id'">
+                    <td>
+                        <waltz-icon name="square"
+                                    ng-style="$ctrl.styles[row.id]">
+                        </waltz-icon>
+                    </td>
+                    <td>
+                        <span ng-bind="row.id"></span>
+                    </td>
+                    <td>
+                        <span ng-bind="row.count"></span>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td>
+                        Total
+                    </td>
+                    <td>
+                        <span ng-bind="$ctrl.total"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div ng-if="!$ctrl.selected"
+             style='padding-top: 30px'>
+            <span class="text-muted small">
+                Hover over the graph to see more detail.
+            </span>
+        </div>
+
+    </div>
+</div>

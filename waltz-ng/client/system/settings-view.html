@@ -1,0 +1,44 @@
+<div>
+    <waltz-page-header icon="cog" name="Settings">
+        <ol class="waltz-breadcrumbs">
+            <li><a ui-sref="main">Home</a></li>
+            <li><a ui-sref="main.system.list">System Admin</a></li>
+            <li>Settings</li>
+        </ol>
+    </waltz-page-header>
+
+    <div class="waltz-page-summary waltz-page-summary-attach">
+        <p class="waltz-paragraph">
+            Settings are used to configure and tune waltz.  The table below shows the currently configured
+            settings.
+        </p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="setting in ctrl.settings | orderBy:'name'">
+                <td><span ng-bind="setting.name"></span></td>
+                <td><span ng-bind="setting.value"></span></td>
+            </tr>
+            <tr ng-if="ctrl.settings.length == 0">
+                <td colspan="2">
+                    No settings
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="pull-right text-muted small">
+            Note that settings are cached in the browser,
+            <a ng-click="ctrl.forceRefresh()"
+               class="clickable">
+                refresh now
+                <waltz-icon name="refresh"></waltz-icon>
+            </a>
+        </div>
+    </div>
+</div>

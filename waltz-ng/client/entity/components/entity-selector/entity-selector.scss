@@ -1,0 +1,23 @@
+.waltz-entity-selector {
+    waltz-icon.wes-selected-icon > span,
+    span.wes-selected-name {
+        display: inline;
+    }
+
+    .wes-entity-description {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .wes-entity-removed {
+        font-style: italic;
+        color: #AAA;
+        text-decoration: line-through rgba(125, 125, 125, 0.3);
+    }
+
+    .wes-entity-pending {
+        color: #ba632d;
+    }
+}

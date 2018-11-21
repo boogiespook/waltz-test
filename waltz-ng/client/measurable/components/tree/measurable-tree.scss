@@ -1,0 +1,29 @@
+.wmt-search-active {
+    color: #32a226;
+}
+.wmt-search-inactive {
+    color: #858c85;
+}
+
+
+.wmt-search-region {
+    margin-left: 24px;
+    padding-bottom: 12px;
+
+    input {
+        display: inline-block;
+        width: 60%;
+        margin-left: 4px;
+    }
+}
+
+.wmt-bar-chart {
+    display: inline-block;
+    background-color: #d5dfff;
+    height: 6px;
+    border: 1px solid #9eacde;
+    &:hover {
+        height: 8px;
+        background-color: #bec7e3;
+    }
+}

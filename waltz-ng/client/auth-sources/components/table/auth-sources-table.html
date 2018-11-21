@@ -1,0 +1,48 @@
+<div class="waltz-auth-sources-table">
+    <div class="row">
+        <div class="col-md-12">
+            <waltz-grid-with-search column-defs="$ctrl.columnDefs"
+                                    entries="$ctrl.gridData"
+                                    on-initialise="$ctrl.onInitialise">
+            </waltz-grid-with-search>
+        </div>
+    </div>
+</div>
+
+
+<!-- DESCRIPTION POPUP -->
+<script type="text/ng-template"
+        id="wast/desc-popup.html">
+    <div>
+        <waltz-markdown text="row.entity.description"></waltz-markdown>
+    </div>
+</script>
+
+
+<!-- CONSUMER DETAIL POPUP -->
+<script type="text/ng-template"
+        id="wast/consumers-popup.html">
+    <div>
+        <div ng-if="row.entity.consumers.length > 0">
+            <table class="table table-condensed table-striped small">
+                <thead>
+                <tr>
+                    <th>Consumers</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="consumer in row.entity.consumers">
+                    <td>
+                        <waltz-entity-link entity-ref="consumer"></waltz-entity-link>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div ng-if="row.entity.consumers.length == 0">
+            <p>No consumers have been defined</p>
+        </div>
+
+    </div>
+</script>

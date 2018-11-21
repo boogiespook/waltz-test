@@ -1,0 +1,45 @@
+.waltz-sub-section {
+    margin-right: 0;
+    margin-left: 0;
+    &.show-border {
+        box-shadow: 0 0 2px 0 hsla(0, 0%, 0%, 0.2);
+        border-radius: 3px;
+    }
+
+    .wss-name {
+        padding-top: 2px;
+        padding-left: 8px;
+        padding-bottom: 2px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #959595;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background-color: #f6f6f6;
+    }
+
+    .wss-small-name {
+        @extend .wss-name;
+        font-size: 9px;
+    }
+}
+
+
+.waltz-sub-section-content {
+    margin: 6px 16px;
+}
+
+
+.waltz-sub-section-controls {
+    font-size: smaller;
+    height: 1.8em;
+    margin: 0;
+    display: block;
+    width: 100%;
+    background-color: #f6f6f6;
+    > * {
+        padding-top: 4px;
+        padding-right: 4px;
+        float: right;
+    }
+}

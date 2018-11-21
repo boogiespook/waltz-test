@@ -1,0 +1,37 @@
+<h4>Update Relationship</h4>
+
+<!-- NEW RELATIONSHIP FORM -->
+<div>
+    <div class="small">
+
+        <form>
+
+            <!-- DESCRIPTION -->
+            <div class="form-group">
+                <label class="control-label">
+                    Description
+                </label>
+                <textarea class='form-control'
+                          ng-model="$ctrl.form.description"
+                          placeholder="Please provide any additional details here"
+                          rows="6">
+                </textarea>
+            </div>
+
+            <hr>
+
+            <!-- ACTION BUTTONS -->
+            <button class="btn btn-xs btn-success"
+                    ng-click="$ctrl.submit()"
+                    ng-disabled="!$ctrl.isFormValid()">
+                Save
+            </button>
+            <a class="clickable"
+               ng-click="$ctrl.onCancel()">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+</div>

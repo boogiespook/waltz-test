@@ -1,0 +1,93 @@
+<div>
+    <waltz-source-data-section-addon ratings="$ctrl.sourceDataRatings"
+                                     entities="['ASSET_COST']">
+    </waltz-source-data-section-addon>
+
+    <waltz-no-data ng-if="$ctrl.costs.length == 0">
+        <message>
+            <strong>
+                No costs registered
+            </strong> against this application
+        </message>
+    </waltz-no-data>
+
+
+
+    <div ng-if="$ctrl.costs.length > 0"
+         class="row">
+        <div class="col-sm-8">
+            <uib-tabset>
+                <uib-tab>
+                    <uib-tab-heading>
+                        Summary
+                    </uib-tab-heading>
+
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-4">
+                            <br>
+                            <h3>
+                                Application TCO:
+                                <waltz-currency-amount amount="$ctrl.mostRecentTotal">
+                                </waltz-currency-amount>
+                            </h3>
+                            <h4>
+                                <span ng-bind="$ctrl.costsMostRecentYear"></span>
+                                <span ng-if="$ctrl.costsMostRecentYear == $ctrl.currentYear">YTD</span>
+                            </h4>
+                        </div>
+                        <div class="col-md-7">
+                            <br>
+                            <table class="table small table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Cost</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in $ctrl.mostRecentCosts">
+                                    <td>
+                                        <waltz-enum-value type="'CostKind'"
+                                                          show-icon="false"
+                                                          key="item.cost.costKind">
+                                        </waltz-enum-value>
+                                    </td>
+                                    <td>
+                                        <waltz-currency-amount amount="item.cost.amount"></waltz-currency-amount>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </uib-tab>
+
+                <uib-tab select="showTableTab = true">
+                    <uib-tab-heading>
+                        Detail
+                    </uib-tab-heading>
+                    <div class="row"
+                         style="padding-top: 1em">
+                        <div class="col-md-12">
+                            <div ng-if="showTableTab">
+                                <waltz-asset-cost-table costs="$ctrl.costs"
+                                                        csv-name='{{$ctrl.parentEntityRef.name}}-costs.csv'>
+                                </waltz-asset-cost-table>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+        <div class="col-sm-4">
+            <waltz-static-panels group-key='SECTION.ASSET_COSTS.ABOUT'
+                                 class="small"
+                                 render-mode="minimal-border">
+            </waltz-static-panels>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,77 @@
+<div>
+    <div class="row"
+         ng-if="$ctrl.bookmarks.length > 0">
+
+        <div class="col-sm-3">
+            <waltz-bookmark-kinds bookmarks="$ctrl.bookmarks"
+                                  on-select="$ctrl.selectBookmarkKind">
+            </waltz-bookmark-kinds>
+        </div>
+
+        <div class="col-sm-9">
+            <table class="table table-condensed wbs-bookmark-table">
+                <colgroup>
+                    <col width="10%">
+                    <col width="70%">
+                    <col width="20%">
+                </colgroup>
+
+                <tbody ng-repeat="bookmarksByKind in $ctrl.filteredBookmarks | orderBy:'bookmarkKind' ">
+                <tr ng-repeat="bookmark in bookmarksByKind.bookmarks"
+                    class="waltz-visibility-parent">
+                    <td style="vertical-align:middle; text-align: center; width: 10%">
+                        <waltz-icon name="{{ bookmark.bookmarkKind | toIconName:'BookmarkKind' }}"
+                                    size="lg">
+                        </waltz-icon>
+                    </td>
+                    <td>
+                        <waltz-icon ng-if='bookmark.isPrimary'
+                                    name="star">
+                        </waltz-icon>
+                        <waltz-icon ng-if='!bookmark.isPrimary'
+                                    class="text-muted"
+                                    name="star-o">
+                        </waltz-icon>
+                        <waltz-external-link title="{{ bookmark.title }}"
+                                             url="{{ bookmark.url }}"
+                                             show-url="true">
+                        </waltz-external-link>
+                        <div>
+
+                            <div ng-if="bookmark.description"
+                                 class="text-muted small">
+                                <span ng-bind="bookmark.description">
+                                </span>
+                            </div>
+
+                            <div ng-if="!bookmark.description"
+                                 class="text-muted small">
+                                <i>No description provided</i>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="small waltz-visibility-child-30">
+                            Last updated:
+                            <div>
+                                <span ng-bind="bookmark.lastUpdatedBy"></span>
+                                ,
+                                <waltz-from-now timestamp="bookmark.lastUpdatedAt"></waltz-from-now>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <waltz-no-data ng-if="$ctrl.bookmarks.length == 0">
+        <message>
+            <strong>No bookmarks</strong>
+            for this
+            <span ng-bind="$ctrl.parentEntityRef.kind | toDisplayName:'entity' | lowercase">
+            </span>
+        </message>
+    </waltz-no-data>
+</div>

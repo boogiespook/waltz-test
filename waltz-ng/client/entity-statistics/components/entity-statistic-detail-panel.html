@@ -1,0 +1,34 @@
+<div>
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <waltz-pie data="$ctrl.pie.data"
+                       selected-segment-key="$ctrl.selectedPieSegment.key"
+                       config="$ctrl.pie.config">
+            </waltz-pie>
+        </div>
+        <div class="col-md-9">
+            <waltz-pie-segment-table data="$ctrl.pie.data"
+                                     selected-segment-key="$ctrl.selectedPieSegment.key"
+                                     config="$ctrl.pie.config"
+                                     headings="$ctrl.tableHeadings">
+            </waltz-pie-segment-table>
+        </div>
+    </div>
+    <div class="row"
+         style="padding-bottom: 12px">
+        <div class="col-md-12">
+            <span class="small text-muted"
+                 ng-bind="$ctrl.definition.description">
+            </span>
+        </div>
+    </div>
+
+    <waltz-entity-statistic-detail-table statistic-values="$ctrl.values"
+                                         statistic-definition='$ctrl.definition'
+                                         filter-outcome="$ctrl.selectedPieSegment.key"
+                                         applications="$ctrl.applications"
+                                         org-units="$ctrl.orgUnits"
+                                         last-updated-at="$ctrl.lastUpdatedAt"
+                                         ng-if="$ctrl.values.length > 0">
+    </waltz-entity-statistic-detail-table>
+</div>

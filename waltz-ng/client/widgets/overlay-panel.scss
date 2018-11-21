@@ -1,0 +1,15 @@
+@import "../../style/util";
+
+
+.waltz-overlay-panel {
+    position: absolute;
+    top:-20px;
+    right: 8px;
+    background: #fafafa;
+    opacity: 0.95;
+    border: 2px solid #eee;
+    padding: 10px;
+    border-radius: 3px;
+    z-index: 100;
+    @include waltz-box-shadow();
+}

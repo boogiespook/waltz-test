@@ -1,0 +1,29 @@
+<div class="waltz-physical-flow-attribute-editor">
+    <form ng-submit="$ctrl.onSubmit()"
+          name="$ctrl.form"
+          novalidate>
+        <formly-form form="$ctrl.form"
+                     model="$ctrl.model"
+                     fields="$ctrl.fields">
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-offset-8 col-md-4">
+                    <button type="submit"
+                            class="btn btn-primary btn-sm"
+                            style="margin-left: 12px"
+                            ng-disabled="$ctrl.form.$invalid">
+                        Save
+                    </button>
+                    <a class="clickable"
+                       ng-click="$ctrl.onCancel()">
+                        <span>Cancel</span>
+                    </a>
+                </div>
+            </div>
+
+        </formly-form>
+
+    </form>
+</div>

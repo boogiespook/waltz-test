@@ -1,0 +1,34 @@
+<div ng-init="selected = {}">
+    <waltz-page-header name="App Selector">
+    </waltz-page-header>
+
+
+
+    <blockquote>
+        The <q>waltz-app-selector</q> directive is backed by a full text index (accessible via <code>/api/app/search/{query}</code>).
+        Supply the directive with a model object and the directive will set a <code>app</code> property on it with the chosen
+        selection.
+    </blockquote>
+
+    <waltz-section name="Demo">
+        <waltz-app-selector model="selected"></waltz-app-selector>
+        <hr/>
+
+        <waltz-app-overview-section ng-if="selected.app"
+                                    app="selected.app"></waltz-app-overview-section>
+    </waltz-section>
+
+
+    <waltz-section name="Example Code">
+        <pre>
+            &lt;waltz-app-selector model="selected">&lt;/waltz-app-selector>
+
+            &lt;hr/>
+
+            &lt;waltz-app-overview-section ng-if="selected.app"
+                                        app="selected.app">&lt;/waltz-app-overview-section>
+
+        </pre>
+    </waltz-section>
+
+</div>

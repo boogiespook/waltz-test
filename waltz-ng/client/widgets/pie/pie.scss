@@ -1,0 +1,20 @@
+
+.waltz-pie {
+
+    .arc {
+        opacity: 0.75;
+        transition: opacity 0.4s;
+        transition: stroke 0.4s;
+
+        &:hover {
+            opacity: 1;
+        }
+
+    }
+
+    .wp-selected {
+        opacity: 1;
+        stroke: #999;
+    }
+
+}

@@ -1,0 +1,22 @@
+<div>
+    <div style="border-top: 2px dotted #ddd; margin-top: 4px; margin-bottom: 8px;"
+         ng-if="$ctrl.servers.length > 0">
+        <h4 class="text-center">
+            <waltz-icon name="server"></waltz-icon>
+            Servers
+        </h4>
+        <waltz-server-pies servers="$ctrl.servers">
+        </waltz-server-pies>
+    </div>
+
+    <div style="border-top: 2px dotted #ddd; margin-top: 4px; margin-bottom: 8px;"
+         ng-if="$ctrl.databases.length > 0">
+        <h4 class="text-center">
+            <waltz-icon name="database"></waltz-icon>
+            Databases
+        </h4>
+        <waltz-database-pies databases="$ctrl.databases">
+        </waltz-database-pies>
+    </div>
+
+</div>

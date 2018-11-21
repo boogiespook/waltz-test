@@ -1,0 +1,48 @@
+<div class="waltz-multi-select-tree-control">
+
+    <div class="wmstc-search-region">
+        <waltz-icon name="search"
+                    ng-class="{
+                    'wmstc-search-active' : $ctrl.searchTerms.length > 0,
+                    'wmstc-search-inactive' : $ctrl.searchTerms.length == 0
+                }">
+        </waltz-icon>
+        <input type='search'
+               class="form-control"
+               name="searchTerms"
+               ng-model="$ctrl.searchTerms"
+               ng-change="$ctrl.searchTermsChanged($ctrl.searchTerms)"
+               ng-model-options="{ debounce: 200 }"
+               placeholder="Search">
+        &nbsp;
+        <waltz-icon name="close"
+                    style="color: darkred"
+                    ng-if="$ctrl.searchTerms.length > 0"
+                    class="clickable"
+                    ng-click="$ctrl.clearSearch()">
+        </waltz-icon>
+    </div>
+
+    <treecontrol class="tree-light"
+                 tree-model="$ctrl.hierarchy"
+                 order-by="'-name'"
+                 expanded-nodes="$ctrl.expandedNodes"
+                 on-selection="$ctrl.onNodeClick(node)"
+                 options="$ctrl.treeOptions">
+
+            <span>
+                <input type="checkbox"
+                       checked
+                       ng-if="$ctrl.checkedMap[node.id]"
+                       ng-disabled="!node.concrete"
+                       ng-click="$ctrl.onNodeUncheck(node.id)">
+                <input type="checkbox"
+                       ng-if="!$ctrl.checkedMap[node.id]"
+                       ng-disabled="!node.concrete"
+                       ng-click="$ctrl.onNodeCheck(node.id)">
+                <ng-transclude>
+                    <span ng-bind="node.name"></span>
+                </ng-transclude>
+            </span>
+    </treecontrol>
+</div>

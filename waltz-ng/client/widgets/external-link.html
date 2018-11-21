@@ -1,0 +1,9 @@
+<a target="_blank"
+   ng-href="{{ ctrl.url }}"
+   rel="noopener noreferrer">
+    <span ng-bind="ctrl.prettyTitle"></span>
+    <span class="text-muted small"
+          ng-if="ctrl.showAside">
+        (<span ng-bind="ctrl.prettyUrl"></span>)
+    </span>
+</a>

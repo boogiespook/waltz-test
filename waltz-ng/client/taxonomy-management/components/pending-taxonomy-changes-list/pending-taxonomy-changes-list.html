@@ -1,0 +1,32 @@
+<div>
+    <!-- NO DATA -->
+    <waltz-no-data ng-if="$ctrl.pendingChanges.length === 0">
+        <message>
+            <strong>No pending changes</strong>
+        </message>
+    </waltz-no-data>
+
+
+    <!-- CHANGES -->
+    <div ng-if="$ctrl.pendingChanges.length > 0">
+        <table class="table table-condensed table-hover small">
+            <thead>
+            <th>Primary Ref</th>
+            <th>Change Type</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="change in $ctrl.pendingChanges"
+                class="clickable"
+                ng-click="$ctrl.onSelect(change)">
+                <td>
+                    <a ng-bind="change.a.name"></a>
+                </td>
+                <td>
+                    <span ng-bind="change.changeType"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
